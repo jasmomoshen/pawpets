@@ -7,7 +7,7 @@ import { auth } from '../../firebase';
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // every time they type their email/password can save the state inside the database or wtv
+    // every time they type their email/password can save the state inside the database or wtv is gg
 
 
     const handleLogin = () => {
@@ -17,7 +17,7 @@ function Login() {
 
 
     return <div className="login">
-        <img src="" alt="pawpwets logo" />
+        <img src="" alt="pawpets logo" />
         <input
             onChange={event => setEmail(event.target.value)}
             type="email"

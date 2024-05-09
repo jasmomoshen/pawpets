@@ -1,5 +1,5 @@
 import React from 'react'
-import Sidenav from './navigation/Sidenav';
+import Sidenav from './navbar/Sidenav';
 
 export const Homepage = () => {
     return (

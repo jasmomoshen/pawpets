@@ -13,11 +13,11 @@ function Signup() {
     const handleSignup = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Automatically sign in the user
+                // auto sign in the user
                 return signInWithEmailAndPassword(auth, email, password);
             })
             .then(() => {
-                // Update user profile
+                // update user profile
                 if (auth.currentUser) {
                     return updateProfile(auth.currentUser, { displayName: username });
                 } else {
