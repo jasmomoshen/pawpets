@@ -10,15 +10,27 @@ function Signup() {
     const [password, setPassword] = useState("");
 
 
-    const handleSignup = (event) => {
-        event.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password).then(
-            signInWithEmailAndPassword(auth, email, password).then(
-                updateProfile(auth.currentUser, { displayName: username })
-            )
-        ).catch(err => {
-            alert(err);
-        })
+    const handleSignup = () => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Automatically sign in the user
+                return signInWithEmailAndPassword(auth, email, password);
+            })
+            .then(() => {
+                // Update user profile
+                if (auth.currentUser) {
+                    return updateProfile(auth.currentUser, { displayName: username });
+                } else {
+                    throw new Error("No current user to update profile for");
+                }
+            })
+            .then(() => {
+                console.log('User signed up and profile updated');
+            })
+            .catch((err) => {
+                console.error('Error during signup:', err.message);
+                alert(err.message);
+            });
     };
 
     return <div className='signup'>

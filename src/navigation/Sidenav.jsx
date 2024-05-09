@@ -5,7 +5,7 @@ import './Sidenav.css';
 import { Avatar } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../firebase';
-import { loginUser, logoutUser } from '../features/userSlice';
+import { logoutUser } from '../features/userSlice';
 import { signOut } from 'firebase/auth';
 
 
@@ -13,10 +13,10 @@ function Sidenav() {
     const user = useSelector(state => state.data.user.user);
     const dispatch = useDispatch();
     const handleLogout = () => {
-        dispatch(loginUser());
+        dispatch(logoutUser());
         signOut(auth);
 
-    }
+    };
 
     return (
         <div>Sidenav
