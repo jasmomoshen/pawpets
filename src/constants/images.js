@@ -1,5 +1,7 @@
-import loginphoto from '../assets/loginphoto.png';
+import logo from '../assets/logo.png';
 
-export default {
-    loginphoto
+const images = {
+  logo: logo
 };
+
+export default images;
