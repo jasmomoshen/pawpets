@@ -12,13 +12,13 @@ function Authentication() {
 
     const handleChange = () => {
         setActive(active === "login" ? 'signup' : "login");
-        // if u r at login page, click button will go signup page, viceversa
+        // if u r at login page, click button will go signup page, viceversa  
     }
 
     return (
         <div className="authentication">
             <div className="auth__left">
-                <img src={images.loginphoto} alt="erguhjrgeherghjk" />
+                <img src={images.logo} alt="erguhjrgeherghjk" />
 
             </div>
             <div className="auth__right">
@@ -27,7 +27,7 @@ function Authentication() {
                     <span>
                         {active === "login" ? (
                             <>
-                                Dont have an account? <button onClick={handleChange}>Sign up</button>
+                                Don't have an account? <button onClick={handleChange}>Sign up</button>
                             </>
                         ) : (
                             <>

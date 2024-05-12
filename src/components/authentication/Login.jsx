@@ -15,9 +15,9 @@ function Login() {
         signInWithEmailAndPassword(auth, email, password);
     }
 
-
     return <div className="login">
-        <img src="" alt="pawpets logo" />
+        <span className='logo'>PawPets</span>
+        <span className='title'>Log In</span>
         <input
             onChange={event => setEmail(event.target.value)}
             type="email"

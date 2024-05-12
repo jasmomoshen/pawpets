@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./Signup.css"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from "../../firebase";
-
+import Add from "./addImageIcon.png"
 
 function Signup() {
     const [email, setEmail] = useState("");
@@ -34,7 +34,8 @@ function Signup() {
     };
 
     return <div className='signup'>
-        <img src="" alt="pawpwets logo" />
+        <span className='logo'>PawPets</span>
+        <span className='title'>Sign Up</span>
         <input
             onChange={event => setEmail(event.target.value)}
             type="email"
@@ -53,9 +54,13 @@ function Signup() {
             placeholder='Password'
             value={password}
         />
+        <input style={{display:"none"}} type="file" id="file"/>
+        <label htmlFor="file">
+            <img src={Add} alt="" />
+            <span>Add an avatar</span>
+        </label>
         <button onClick={handleSignup}>Sign up</button>
     </div>
-
 }
 
 export default Signup
