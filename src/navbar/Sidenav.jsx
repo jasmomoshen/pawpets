@@ -19,9 +19,13 @@ function Sidenav() {
     };
 
     return (
-        <div>Sidenav
+        <div>
+            <div>
+
+
+            </div>
             <button className='sidenav__button'>
-                <Avatar>{user.username.charAt(0).toUpperCase()}</Avatar>
+                <Avatar>{user.username ? user.username.charAt(0).toUpperCase() : "A"}</Avatar>
                 <span>{user.username}
                     <button onClick={handleLogout} className="logout__button">
                         Log out
