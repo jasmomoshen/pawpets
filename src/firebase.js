@@ -1,16 +1,21 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC0SMta8b6d2Al5LVzn3kNMCC_fCu3Tcok",
-    authDomain: "pawpets-a77fa.firebaseapp.com",
-    projectId: "pawpets-a77fa",
-    storageBucket: "pawpets-a77fa.appspot.com",
-    messagingSenderId: "453040780885",
-    appId: "1:453040780885:web:6aeed378efafe8322b06dc"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
+
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app);

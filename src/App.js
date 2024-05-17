@@ -6,10 +6,6 @@ import { useEffect } from 'react';
 import { auth } from './firebase';
 import { loginUser, setLoading } from './features/userSlice';
 
-// import Header from './components/map_feature/Header/Header';
-// import List from './components/map_feature/List/List';
-// import Map from './components/map_feature/Map/Map';
-
 function App() {
 
   const dispatch = useDispatch();
