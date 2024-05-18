@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
-import { doc, setDoc } from "firebase/firestore";
-import { db } from '../../firebase';
+import { doc, updateDoc } from "firebase/firestore";
+import { auth, db } from '../../firebase';
 
 const Edit = ({ pets, selectedPet, setPets, setIsEditing }) => {
   const id = selectedPet.id;
@@ -24,7 +24,19 @@ const Edit = ({ pets, selectedPet, setPets, setIsEditing }) => {
       });
     }
 
-    const pet = {
+    const user = auth.currentUser;
+    if (!user) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Unauthorized',
+        text: 'You must be logged in to edit a pet.',
+        showConfirmButton: true,
+      });
+      return;
+    }
+    const uid = user.uid;
+
+    const updatedPet = {
       id,
       petName,
       petType,
@@ -32,22 +44,32 @@ const Edit = ({ pets, selectedPet, setPets, setIsEditing }) => {
     };
 
 
-    // update doc
-    await setDoc(doc(db, "pets", id), {
-      ...pets
-    });
+    try {
+      // Update the document in Firestore using the user's UID
+      await updateDoc(doc(db, "users", uid, "pets", id), updatedPet);
 
+      // Update the local state
+      const updatedPets = pets.map(pet => pet.id === id ? { ...pet, ...updatedPet } : pet);
+      setPets(updatedPets);
 
-    setPets(pets);
-    setIsEditing(false);
+      setIsEditing(false);
 
-    Swal.fire({
-      icon: 'success',
-      title: 'Updated!',
-      text: `${pet.petName} ${pet.petType}'s data has been updated.`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated!',
+        text: `${petName}'s data has been updated.`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.error("Error updating pet:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Update failed',
+        text: 'There was an error updating the pet data.',
+        showConfirmButton: true,
+      });
+    }
   };
 
   return (

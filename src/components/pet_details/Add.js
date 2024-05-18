@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { auth } from '../../firebase';
+
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from '../../firebase';
@@ -10,14 +12,22 @@ const Add = ({ pets, setPets, setIsAdding }) => {
   const [petType, setPetType] = useState('');
   const [petBreed, setPetBreed] = useState('');
 
-  // const [petName, setpetName] = useState('');
-  // const [petType, setpetType] = useState('');
-  // const [email, setEmail] = useState('');
-
-
   const handleAdd = async (e) => {
     e.preventDefault();
 
+
+    const user = auth.currentUser;
+    if (!user) {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Not logged in',
+        text: 'You must be logged in to add a pet.',
+        showConfirmButton: true,
+      });
+    }
+    const uid = user.uid;
+
+    // check if all components of the form are filled in
     if (!petName || !petType || !petBreed) {
       return Swal.fire({
         icon: 'error',
@@ -27,6 +37,7 @@ const Add = ({ pets, setPets, setIsAdding }) => {
       });
     }
 
+    // construct new pet object and store in pets array
     const newPet = {
       petName,
       petType,
@@ -37,7 +48,11 @@ const Add = ({ pets, setPets, setIsAdding }) => {
 
 
     // Add a new document with a generated id
-    const docRef = await addDoc(collection(db, "pets"), {
+    // const docRef = await addDoc(collection(db, "pets"), {
+    //   ...newPet
+    // });
+
+    const docRef = await addDoc(collection(db, "users", uid, "pets"), {
       ...newPet
     });
 

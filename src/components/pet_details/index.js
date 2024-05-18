@@ -5,7 +5,7 @@ import Header from './Header';
 import Table from './Table';
 import Add from './Add';
 import Edit from './Edit';
-import { db } from '../../firebase';
+import { db, auth } from '../../firebase';
 
 
 import { collection, getDocs } from "firebase/firestore";
@@ -15,22 +15,24 @@ import { doc, deleteDoc } from "firebase/firestore";
 
 
 const PetDashboard = ({ setIsAuthenticated }) => {
-  const [pets, setPets] = useState();
+  const [pets, setPets] = useState([]);
   const [selectedPet, setSelectedPet] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   const getPets = async () => {
-    const querySnapshot = await getDocs(collection(db, "pets"));
-    const pets = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-    });
-    setPets(pets)
-
-  }
+    const user = auth.currentUser;
+    if (user) {
+      const uid = user.uid;
+      const querySnapshot = await getDocs(collection(db, "users", uid, "pets"));
+      const petsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setPets(petsData);
+    } else {
+      // Handle case where there is no user logged in
+      console.log("No user logged in");
+      setPets([]); // Clear pets if no user is logged in
+    }
+  };
 
   useEffect(() => {
     getPets()
@@ -38,7 +40,6 @@ const PetDashboard = ({ setIsAuthenticated }) => {
 
   const handleEdit = id => {
     const [pet] = pets.filter(pet => pet.id === id);
-
     setSelectedPet(pet);
     setIsEditing(true);
   };
@@ -52,22 +53,38 @@ const PetDashboard = ({ setIsAuthenticated }) => {
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
     }).then(result => {
-      if (result.value) {
-        const [pet] = pets.filter(pet => pet.id === id);
-
-        deleteDoc(doc(db, "pets", id));
-
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Deleted!',
-          text: `${pet.petName} ${pet.petType}'s data has been deleted.`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-
-        const petsCopy = pets.filter(pet => pet.id !== id);
-        setPets(petsCopy);
+      if (result.isConfirmed) {
+        const user = auth.currentUser;
+        if (!user) {
+          return Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'You must be logged in to delete a pet.',
+            showConfirmButton: true,
+          });
+        }
+        const uid = user.uid;
+        deleteDoc(doc(db, "users", uid, "pets", id))
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Deleted!',
+              text: 'Pet has been deleted.',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            const updatedPets = pets.filter(pet => pet.id !== id);
+            setPets(updatedPets);
+          })
+          .catch(error => {
+            console.error("Error deleting pet:", error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Failed to delete',
+              text: 'Something went wrong.',
+              showConfirmButton: true,
+            });
+          });
       }
     });
   };
@@ -107,3 +124,6 @@ const PetDashboard = ({ setIsAuthenticated }) => {
 };
 
 export default PetDashboard;
+
+
+

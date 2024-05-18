@@ -12,8 +12,6 @@ code {
     monospace;
 }
 
-
-
 /**
  * Scaffolding for Pet Details Table
  */
@@ -135,8 +133,8 @@ a.full-button {
 }
 
 /**
- * Forms
- */
+   * Forms
+   */
 [type='color'],
 [type='date'],
 [type='datetime'],
@@ -309,8 +307,8 @@ textarea.is-success:active {
 }
 
 /**
- * Tables
- */
+   * Tables
+   */
 table {
   border-collapse: collapse;
   border-spacing: 0;
