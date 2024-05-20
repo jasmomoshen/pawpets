@@ -53,7 +53,7 @@ const PetDashboard = ({ setIsAuthenticated }) => {
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
     }).then(result => {
-      if (result.isConfirmed) {
+      if (result.value) {
         const user = auth.currentUser;
         if (!user) {
           return Swal.fire({
