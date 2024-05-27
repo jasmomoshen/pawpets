@@ -29,7 +29,7 @@ set the image when we make
 }
 
 .signup>input:focus {
-    outline: 50px solid grey;
+    outline: 1px solid grey;
 }
 
 .logo {
