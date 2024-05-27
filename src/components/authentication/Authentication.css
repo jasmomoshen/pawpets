@@ -9,18 +9,23 @@
 .auth__left {
     flex: 0.5;
     text-align: center;
+    margin-left: 50px;
+    margin-top: 80px;
 
 }
 
 .auth__right {
     flex: 0.5;
+    margin-top: 80px;
+    margin-right: 50px;
 }
 
 
 .auth__left>img {
-    width: 400px;
+    width: 500px;
     margin-top: 40px;
     margin-bottom: 40px;
+    align-items: center;
 }
 
 .auth__more {
