@@ -1,15 +1,15 @@
 // build more buttons inside here like blablabla maps bla
 
-import React from 'react'
+import React, {useState} from 'react'
 import './Sidenav.css';
 import { Avatar } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../firebase';
 import { logoutUser } from '../features/userSlice';
 import { signOut } from 'firebase/auth';
+import { NavLink, Link } from 'react-router-dom'
 
-
-function Sidenav() {
+export const Sidenav = () => {
     const user = useSelector(state => state.data.user.user);
     const dispatch = useDispatch();
     const handleLogout = () => {
@@ -17,25 +17,40 @@ function Sidenav() {
         signOut(auth);
 
     };
+    const [menuOpen, setMenuOpen] = useState(false)
 
     return (
-        <div>
-            <div>
-
-
+        <nav className="sidenav__nav">
+            <Link to="/" className='title'>PawPets</Link>
+            <div className='menu' onClick={() => {
+                setMenuOpen(!menuOpen)
+            }}>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <button className='sidenav__button'>
+            <ul className={menuOpen ? "open" : ""}>
+                <li>
+                    <NavLink to="/chat">Chat</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/map">Map Feature</NavLink>
+                </li>
+               
+            </ul>
+
+            <div className="sidenav__header">
                 <Avatar>{user.username ? user.username.charAt(0).toUpperCase() : "A"}</Avatar>
-                <span>{user.username}
-                    <button onClick={handleLogout} className="logout__button">
-                        Log out
-                    </button>
-
-                </span>
-
+                <span style={{ color: 'white' }}>{user.username}</span>
+            </div>
+            
+            
+            <button onClick={handleLogout} className="logout__button">
+                Log out
             </button>
-        </div>
-    )
+        </nav>
+    );
+
 }
 
 export default Sidenav;
