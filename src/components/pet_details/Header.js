@@ -7,7 +7,7 @@ const Header = ({ setIsAdding, setIsAuthenticated }) => {
     <header>
       <h1>My Pets Details</h1>
       <div style={{ marginTop: '30px', marginBottom: '18px' }}>
-        <button onClick={() => setIsAdding(true)}>Add Pets</button>
+        <button onClick={() => setIsAdding(true)}>Add Your Pets</button>
         {/* <Logout setIsAuthenticated={setIsAuthenticated} /> */}
       </div>
     </header>

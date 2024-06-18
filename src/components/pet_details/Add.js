@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import { auth } from '../../firebase';
-
+import { auth, db, storage } from '../../firebase';
 
 import { collection, addDoc } from "firebase/firestore";
-import { db } from '../../firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 
-const Add = ({ pets, setPets, setIsAdding }) => {
+const Add = ({ pets, setPets, setIsAdding, getPets }) => {
   const [petName, setPetName] = useState('');
   const [petType, setPetType] = useState('');
   const [petBreed, setPetBreed] = useState('');
+  const [file, setFile] = useState(null);
+
+  // const [uploadProgress, setUploadProgress] = useState(0);
+
+
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -28,7 +32,7 @@ const Add = ({ pets, setPets, setIsAdding }) => {
     const uid = user.uid;
 
     // check if all components of the form are filled in
-    if (!petName || !petType || !petBreed) {
+    if (!petName || !petType || !petBreed || !file) {
       return Swal.fire({
         icon: 'error',
         title: 'Error!',
@@ -37,21 +41,23 @@ const Add = ({ pets, setPets, setIsAdding }) => {
       });
     }
 
+    const storageRef = ref(storage, `pets/${file.name}`);
+    const uploadTask = await uploadBytesResumable(storageRef, file);
+    const imageUrl = await getDownloadURL(uploadTask.ref);
+
+
     // construct new pet object and store in pets array
     const newPet = {
       petName,
       petType,
-      petBreed
+      petBreed,
+      imageUrl
     };
 
     pets.push(newPet);
 
 
     // Add a new document with a generated id
-    // const docRef = await addDoc(collection(db, "pets"), {
-    //   ...newPet
-    // });
-
     const docRef = await addDoc(collection(db, "users", uid, "pets"), {
       ...newPet
     });
@@ -59,6 +65,7 @@ const Add = ({ pets, setPets, setIsAdding }) => {
 
     setPets(pets);
     setIsAdding(false);
+    getPets()
 
     Swal.fire({
       icon: 'success',
@@ -96,6 +103,13 @@ const Add = ({ pets, setPets, setIsAdding }) => {
           name="petBreed"
           value={petBreed}
           onChange={e => setPetBreed(e.target.value)}
+        />
+
+        <label htmlFor="file">Pet Image</label>
+        <input
+          id="file"
+          type="file"
+          onChange={e => setFile(e.target.files[0])}
         />
 
         <div style={{ marginTop: '30px' }}>

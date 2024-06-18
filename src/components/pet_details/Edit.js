@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 import { doc, updateDoc } from "firebase/firestore";
-import { auth, db } from '../../firebase';
+import { auth, db, storage } from '../../firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 
 const Edit = ({ pets, selectedPet, setPets, setIsEditing }) => {
   const id = selectedPet.id;
@@ -10,6 +12,7 @@ const Edit = ({ pets, selectedPet, setPets, setIsEditing }) => {
   const [petName, setPetName] = useState(selectedPet.petName);
   const [petType, setPetType] = useState(selectedPet.petType);
   const [petBreed, setPetBreed] = useState(selectedPet.petBreed);
+  const [file, setFile] = useState(null);
 
 
   const handleUpdate = async (e) => {
@@ -36,11 +39,19 @@ const Edit = ({ pets, selectedPet, setPets, setIsEditing }) => {
     }
     const uid = user.uid;
 
+    let imageUrl = selectedPet.imageUrl;
+    if (file) {
+      const storageRef = ref(storage, `pets/${file.name}`);
+      const uploadTask = await uploadBytesResumable(storageRef, file);
+      imageUrl = await getDownloadURL(uploadTask.ref);
+    }
+
     const updatedPet = {
       id,
       petName,
       petType,
       petBreed,
+      imageUrl
     };
 
 
@@ -100,6 +111,13 @@ const Edit = ({ pets, selectedPet, setPets, setIsEditing }) => {
           value={petBreed}
           onChange={e => setPetBreed(e.target.value)}
         />
+        <label htmlFor="file">Change Pet Image</label>
+        <input
+          id="file"
+          type="file"
+          onChange={e => setFile(e.target.files[0])}
+        />
+
         <div style={{ marginTop: '30px' }}>
           <input type="submit" value="Update" />
           <input

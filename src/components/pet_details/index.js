@@ -109,6 +109,7 @@ const PetDashboard = ({ setIsAuthenticated }) => {
           pets={pets}
           setPets={setPets}
           setIsAdding={setIsAdding}
+          getPets={getPets}
         />
       )}
       {isEditing && (
