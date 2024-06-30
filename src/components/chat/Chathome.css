@@ -43,13 +43,6 @@
                         object-fit: cover;
                     }
 
-                    button{
-                        background-color: #2B3A55;
-                        color:#fff;
-                        font-size: 10px;
-                        border: none;
-                        cursor: pointer;
-                    }
                 }
             }
 
