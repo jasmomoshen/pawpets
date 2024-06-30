@@ -5,7 +5,7 @@ import React from 'react';
 const Header = ({ setIsAdding, setIsAuthenticated }) => {
   return (
     <header>
-      <h1>My Pets Details</h1>
+      <h1>My Petfolio</h1>
       <div style={{ marginTop: '30px', marginBottom: '18px' }}>
         <button onClick={() => setIsAdding(true)}>Add Your Pets</button>
         {/* <Logout setIsAuthenticated={setIsAuthenticated} /> */}
