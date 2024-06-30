@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { auth } from './firebase';
 import { loginUser, setLoading } from './features/userSlice';
 
+
 function App() {
 
   const dispatch = useDispatch();

@@ -42,22 +42,11 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
 
 
 
-const List = () => {
+const List = ({ places }) => {
     const [type, setType] = useState('clinics');
     const [rating, setRating] = useState('');
 
-    const places = [
-        { name: 'Cool Pet' },
-        { name: 'Best Meow' },
-        { name: 'Best Dog' },
-        { name: 'Cool Pet' },
-        { name: 'Best Meow' },
-        { name: 'Best Dog' },
-        { name: 'Cool Pet' },
-        { name: 'Best Meow' },
-        { name: 'Best Dog' }
 
-    ];
 
     return (
         <Container>
