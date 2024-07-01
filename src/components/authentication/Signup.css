@@ -1,4 +1,5 @@
-.signup {
+/* Signup.css */
+.signup-container {
     display: flex;
     flex-direction: column;
     border: 1px solid grey;
@@ -9,7 +10,7 @@
     background-color: #F2E5E5;
 }
 
-.signup>input {
+.signup-container input {
     background-color: #E8C4C4;
     border: 1px solid grey;
     border-radius: 3px;
@@ -18,7 +19,7 @@
     color: black;
 }
 
-.signup>input:focus {
+.signup-container input:focus {
     outline: 1px solid grey;
 }
 
@@ -38,22 +39,24 @@
     margin-bottom: 10px;
 }
 
-.signup>label {
+.signup-container label {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: px;
+    font-size: 14px;
+    /* Set the font size */
     margin-bottom: 10px;
     cursor: pointer;
 }
 
-.signup>label img {
-    width: 30px; /* Adjust this value to make the image smaller or larger */
-    
+.signup-container label img {
+    width: 30px;
+    /* Adjust this value to make the image smaller or larger */
+    height: 30px;
+    /* Ensure the image maintains a consistent size */
 }
 
-
-.signup>button {
+.signup-container button {
     padding: 12px;
     border-radius: 8px;
     border: 0;

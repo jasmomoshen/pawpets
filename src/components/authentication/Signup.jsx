@@ -55,7 +55,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup">
+    <div className="signup-container">
       <span className='logo'>PawPets</span>
       <span className='title'>Sign Up</span>
       <form onSubmit={handleSignup}>
