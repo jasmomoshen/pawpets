@@ -1,4 +1,3 @@
-/* Signup.css */
 .signup-container {
     display: flex;
     flex-direction: column;
@@ -10,19 +9,24 @@
     background-color: #F2E5E5;
 }
 
-.signup-container input {
+.signup-container input,
+.signup-container button {
     background-color: #E8C4C4;
     border: 1px solid grey;
     border-radius: 3px;
     padding: 12px;
     margin-bottom: 20px;
     color: black;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    width: 100%; /* Make input and button full-width */
 }
 
+/* Additional styles for inputs */
 .signup-container input:focus {
     outline: 1px solid grey;
 }
 
+/* Style for the logo */
 .logo {
     display: flex;
     margin-top: 3px;
@@ -32,6 +36,7 @@
     align-items: center;
 }
 
+/* Style for the title */
 .title {
     color: #2B3A55;
     font-size: 20px;
@@ -39,6 +44,7 @@
     margin-bottom: 10px;
 }
 
+/* Style for the label */
 .signup-container label {
     display: flex;
     align-items: center;
@@ -49,6 +55,7 @@
     cursor: pointer;
 }
 
+/* Style for the image in the label */
 .signup-container label img {
     width: 30px;
     /* Adjust this value to make the image smaller or larger */
@@ -56,12 +63,16 @@
     /* Ensure the image maintains a consistent size */
 }
 
+/* Style for the button */
 .signup-container button {
-    padding: 12px;
-    border-radius: 8px;
-    border: 0;
-    color: white;
+    border-radius: 3px; /* Match the input border-radius */
     background-color: #CE7777;
+    color: white;
     font-weight: bolder;
     cursor: pointer;
+}
+
+/* Button hover effect */
+.signup-container button:hover {
+    background-color: #b65b5b; /* A darker shade for hover effect */
 }
