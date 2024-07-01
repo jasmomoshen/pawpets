@@ -1,67 +1,97 @@
-import React, { useState } from 'react'
-import "./Signup.css"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from "../../firebase";
-import Add from "./addImageIcon.png"
+import React, { useState } from 'react';
+import './Signup.css';
+import { auth, db, storage } from '../../firebase';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { doc, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import Add from '../authentication/addImageIcon.png';
 
-function Signup() {
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+const Signup = () => {
+  const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [file, setFile] = useState(null);
+  const [err, setErr] = useState(false);
+  const navigate = useNavigate();
 
+  const handleSignup = async (e) => {
+    e.preventDefault();
 
-    const handleSignup = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // auto sign in the user
-                return signInWithEmailAndPassword(auth, email, password);
-            })
-            .then(() => {
-                // update user profile
-                if (auth.currentUser) {
-                    return updateProfile(auth.currentUser, { displayName: username });
-                } else {
-                    throw new Error("No current user to update profile for");
-                }
-            })
-            .then(() => {
-                console.log('User signed up and profile updated');
-            })
-            .catch((err) => {
-                console.error('Error during signup:', err.message);
-                alert(err.message);
-            });
-    };
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
 
-    return <div className='signup'>
-        <span className='logo'>PawPets</span>
-        <span className='title'>Sign Up</span>
+      const storageRef = ref(storage, `avatars/${displayName}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          // Handle progress if needed
+        },
+        (error) => {
+          // Handle error
+          setErr(true);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          await updateProfile(res.user, {
+            displayName,
+            photoURL: downloadURL,
+          });
+          await setDoc(doc(db, 'users', res.user.uid), {
+            uid: res.user.uid,
+            displayName,
+            email,
+            photoURL: downloadURL,
+          });
+          await setDoc(doc(db, 'userChats', res.user.uid), {});
+          navigate('/');
+        }
+      );
+    } catch (err) {
+      setErr(true);
+    }
+  };
+
+  return (
+    <div className="signup">
+      <span className='logo'>PawPets</span>
+      <span className='title'>Sign Up</span>
+      <form onSubmit={handleSignup}>
         <input
-            onChange={event => setEmail(event.target.value)}
-            type="email"
-            placeholder="Email"
-            value={email}
+          type="text"
+          placeholder="Username"
+          onChange={(e) => setDisplayName(e.target.value)}
+          value={displayName}
         />
         <input
-            onChange={event => setUsername(event.target.value)}
-            type="text"
-            placeholder="Username"
-            value={username}
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
         <input
-            onChange={event => setPassword(event.target.value)}
-            type="password"
-            placeholder='Password'
-            value={password}
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
         />
-        <input style={{display:"none"}} type="file" id="file"/>
+        <input
+          style={{ display: 'none' }}
+          type="file"
+          id="file"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
         <label htmlFor="file">
-            <img src={Add} alt="" />
-            <span>Add an avatar</span>
+          <img src={Add} alt="" />
+          <span>Add an avatar</span>
         </label>
-        <button onClick={handleSignup}>Sign up</button>
+        <button type="submit">Sign Up</button>
+        {err && <span>Something went wrong</span>}
+      </form>
     </div>
-}
+  );
+};
 
-export default Signup
-//jkjbkj
+export default Signup;

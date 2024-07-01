@@ -24,30 +24,35 @@
                 align-items: center;
                 background-color: #CE7777;
                 height: 50px;
-                padding: 10px;
+                padding: 10px 20px;
                 justify-content: space-between;
+                margin-bottom: 0px;
+                
 
                 .logo{
                     font-weight: bold;
                 }
 
-                .user{
+                .user {
                     display: flex;
-                    gap: 10px;
-
-                    img{
-                        background-color: #fff;
-                        height: 24px;
-                        width: 24px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                    }
-
-                }
+                    align-items: center;
+                  }
+                  
+                  .user .MuiAvatar-root {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                  }
+                  
+                  .user span {
+                    font-size: 18px;
+                  }
             }
 
             .search{
                 border-bottom: 1px solid grey;
+                margin-bottom: 0px;
 
                 .searchFrom{
                     padding: 10px;
@@ -179,6 +184,8 @@
 
             .input{
                 height: 50px;
+                max-width:none;
+                
                 background-color: white;
                 padding: 10px;
                 display: flex;
