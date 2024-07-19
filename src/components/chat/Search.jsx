@@ -79,7 +79,7 @@ const Search = () => {
 
   return (
     <div className='search'>
-      <div className="searchForm">
+      <div className="searchForm" style={{ display: 'flex', justifyContent: 'center' }}>
         <input
           type="text"
           placeholder='Find a user'
