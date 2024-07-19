@@ -1,6 +1,5 @@
 import React, { useState, useContext} from 'react'
 import Img from "./image.png"
-import Attach from "./attach.png"
 import { ChatContext } from '../../contexts/ChatContext';
 import { UserContext } from '../../contexts/UserContext';
 import { async } from "@firebase/util";
@@ -78,14 +77,14 @@ const Input = () => {
       placeholder='Type something...' 
       onChange={e=>setText(e.target.value)}
       value={text}
+      style={{ marginTop: '10px', marginRight: '0px' }}
       />
       <div className="send">
-        <img src={Attach} alt="" />
         <input type="file" style={{display: "none"}} id='file' onChange={e=>setImg(e.target.files[0])}/>
         <label htmlFor="file">
-          <img src={Img} alt="" />
+          <img src={Img} alt="" style={{ width: '50%', height: 'auto', marginLeft: '55px' }}/>
         </label>
-        <button onClick={handleSend}>Send</button>
+        <button onClick={handleSend} style={{ marginTop: '10px', marginRight: '5px' }}>Send</button>
       </div>
     </div>
   )

@@ -16,14 +16,13 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <span className="logo">PawPets</span>
       <div className="user">
         {currentUser?.photoURL ? (
           <Avatar src={currentUser.photoURL} alt={currentUser.displayName} />
           ) : (
           <Avatar>{currentUser?.displayName ? currentUser.displayName.charAt(0).toUpperCase() : 'A'}</Avatar>
            )}
-          <span style={{ color: 'white' }}>{currentUser?.displayName}</span>
+          <span style={{ color: 'white', fontSize: '2em' }}>{currentUser?.displayName}</span>
       </div>
     </div>
   );
