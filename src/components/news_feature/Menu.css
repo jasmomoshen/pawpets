@@ -1,0 +1,42 @@
+.newsmenu li {
+    display: inline-block;
+    margin: 1em;
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+    background: #eee;
+    border-radius: 3em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.newsmenu ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    background: none;
+}
+
+.newsmenu .inactive {
+    background: #eee;
+}
+
+.newsmenu .active {
+    background: #ccc;
+}
+
+.newsmenu .active:hover {
+    background: #aeaeae;
+}
+
+.newsmenu .inactive:hover {
+    background: #dddddd;
+}
+
+.newsmenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    /* Ensure no background is applied */
+
+}

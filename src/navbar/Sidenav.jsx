@@ -33,6 +33,9 @@ export const Sidenav = () => {
                 <li>
                     <NavLink to="/map">Map Feature</NavLink>
                 </li>
+                <li>
+                    <NavLink to="/news">News</NavLink>
+                </li>
             </ul>
 
             <div className="sidenav__header">
