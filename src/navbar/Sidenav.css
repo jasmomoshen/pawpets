@@ -10,6 +10,7 @@ nav {
     position: sticky;
     top: 0;
     padding: 0 1rem;
+    z-index: 10; /* Ensure nav is on top */
 }
 
 nav .sidenav__header,
@@ -21,6 +22,7 @@ nav ul {
     /* Make sure these items are flex items */
     align-items: center;
     /* Align items vertically */
+
     gap: 1.5rem;
 }
 
@@ -108,14 +110,13 @@ nav .menu span {
     nav {
         flex-direction: column;
         align-items: start;
-
     }
 
     nav ul {
         display: none;
         flex-direction: column;
         margin-bottom: 0.25rem;
-        width: auto;
+        width: 100%; /* Ensure ul takes full width */
         align-items: center;
     }
 
@@ -142,4 +143,3 @@ nav .menu span {
         margin-bottom: 1rem;
         margin-top: 1rem;
     }
-}

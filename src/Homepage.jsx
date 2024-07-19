@@ -4,6 +4,7 @@ import Chathome from './components/chat/Chathome';
 import PetDashboard from './components/pet_details';
 import MapDashboard from './components/map_feature/MapDashboard';
 import NewsDashboard from './components/news_feature/NewsDashboard';
+import Reminders from './components/reminders/reminder';
 import { Route, Routes } from 'react-router-dom';
 
 export const Homepage = () => {
@@ -16,6 +17,7 @@ export const Homepage = () => {
                 <Route path="/map" element={<MapDashboard />} />
                 <Route path="/news" element={<NewsDashboard />} />
 
+                <Route path="/reminders" element={<Reminders />} />
             </Routes>
         </div>
     )
