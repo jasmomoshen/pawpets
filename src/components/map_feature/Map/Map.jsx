@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { Paper, Typography, useMediaQuery } from '@mui/material';
 import { LocationOnOutlined } from '@mui/icons-material';
-import Rating from '@mui/material/Rating'; // Ensure correct import
+import Rating from '@mui/material/Rating';
 
 import { styled } from '@mui/system';
 import { Box } from '@mui/material';
