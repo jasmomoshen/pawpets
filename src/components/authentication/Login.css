@@ -26,7 +26,6 @@ set the image when we make
     padding: 12px;
     margin-bottom: 20px;
     color: black;
-    box-sizing: border-box;
 }
 
 .login>input:focus {
@@ -57,5 +56,4 @@ set the image when we make
     background-color: #CE7777;
     font-weight: bolder;
     cursor: pointer;
-    
 }

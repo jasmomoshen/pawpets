@@ -24,6 +24,7 @@ const Loading = styled(Box)(({ theme }) => ({
 
 const Container = styled(Box)(({ theme }) => ({
     padding: '25px',
+    backgroundColor: '#E8C4C4',
 }));
 
 const MarginBottom = styled(Box)(({ theme }) => ({

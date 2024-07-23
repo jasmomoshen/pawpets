@@ -2,7 +2,6 @@ import React, { useState, useContext} from 'react'
 import Img from "./image.png"
 import { ChatContext } from '../../contexts/ChatContext';
 import { UserContext } from '../../contexts/UserContext';
-import { async } from "@firebase/util";
 import { Timestamp, arrayUnion, doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase";
 import { v4 as uuid } from "uuid";
