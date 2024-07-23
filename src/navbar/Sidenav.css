@@ -10,7 +10,7 @@ nav {
     position: sticky;
     top: 0;
     padding: 0 1rem;
-    z-index: 10; /* Ensure nav is on top */
+    z-index: 1000; /* Ensure nav is on top */
 }
 
 nav .sidenav__header,
@@ -19,10 +19,7 @@ nav ul {
     margin-left: auto;
     margin-right: 2rem;
     display: flex;
-    /* Make sure these items are flex items */
     align-items: center;
-    /* Align items vertically */
-
     gap: 1.5rem;
 }
 
@@ -51,8 +48,7 @@ nav .sidenav__header {
 }
 
 nav .sidenav__header .logout__button {
-    margin-left: 10px;
-    /* Adjust margin as needed */
+    margin-left: 10px; /* Adjust margin as needed */
 }
 
 nav .title {
@@ -119,10 +115,9 @@ nav .menu span {
         width: 100%; /* Ensure ul takes full width */
         align-items: center;
     }
-
+    
     nav ul.open {
         display: flex;
-
     }
 
     nav ul li {
@@ -143,3 +138,4 @@ nav .menu span {
         margin-bottom: 1rem;
         margin-top: 1rem;
     }
+}

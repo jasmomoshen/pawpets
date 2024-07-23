@@ -62,7 +62,7 @@ const Reminder = () => {
 
   return (
     <div className="container" style={containerStyle}>
-      <h2 style={{ textAlign: 'center', marginTop: '0px' }}>Reminders!</h2>
+      <h2 style={{ textAlign: 'center', marginTop: '-100px', marginBottom: '0px' }}>Reminders!</h2>
 
       <label style={labelStyle}>Title :</label>
       <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} style={inputStyle} />
@@ -116,9 +116,9 @@ const containerStyle = {
 
 const inputStyle = {
   //Adjust to fill width without overflow
-  marginTop: '0px',
   marginLeft: '0px',
   marginRight: '0px',
+  marginBottom: '0px',
   padding: '10px',
   boxSizing: 'border-box', // Include padding and border in the element's total width and height
   backgroundColor: '#F2E5E5',

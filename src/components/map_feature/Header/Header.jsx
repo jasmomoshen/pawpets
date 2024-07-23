@@ -48,6 +48,7 @@ const InputInput = styled('input')(({ theme }) => ({
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'space-between',
+    backgroundColor: '#CE7777',
 }));
 
 const Header = () => {

@@ -32,10 +32,15 @@ export const Sidenav = () => {
                     <NavLink to="/chat">Chat</NavLink>
                 </li>
                 <li>
+                    <NavLink to="/forum">Forum</NavLink>
+                </li>
+                <li>
                     <NavLink to="/map">Map Feature</NavLink>
                 </li>
                 <li>
                     <NavLink to="/news">News</NavLink>
+                </li>
+                <li>
                     <NavLink to="/reminders">Reminders</NavLink>
                 </li>
             </ul>
