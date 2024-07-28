@@ -2,15 +2,15 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { ChatContext } from '../../contexts/ChatContext';
 import { UserContext } from '../../contexts/UserContext';
 
-const Message = ({message}) => {
+const Message = ({ message }) => {
 
-  const {currentUser} = useContext(UserContext);
-  const {data} = useContext(ChatContext);
+  const { currentUser } = useContext(UserContext);
+  const { data } = useContext(ChatContext);
 
   const ref = useRef()
 
   useEffect(() => {
-    ref.current?.scrollIntoView({behavior:"smooth"});
+    ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
   return (
@@ -18,8 +18,8 @@ const Message = ({message}) => {
       className={`message ${message.senderId === currentUser.uid && "owner"}`}>
       <div className="messageInfo">
         <img src={message.senderId === currentUser.uid ? currentUser.photoURL : data.user.photoURL}
-        alt="" />
-        
+          alt="" />
+
       </div>
       <div className="messageContent">
         <p>{message.text}</p>
