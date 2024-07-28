@@ -121,7 +121,6 @@ const Edit = ({ pets, selectedPet, setPets, setIsEditing }) => {
         <div style={{ marginTop: '30px' }}>
           <input type="submit" value="Update" />
           <input
-            style={{ marginLeft: '12px' }}
             className="muted-button"
             type="button"
             value="Cancel"

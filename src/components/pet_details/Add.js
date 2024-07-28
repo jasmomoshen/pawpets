@@ -115,7 +115,6 @@ const Add = ({ pets, setPets, setIsAdding, getPets }) => {
         <div style={{ marginTop: '30px' }}>
           <input type="submit" value="Add" />
           <input
-            style={{ marginLeft: '12px' }}
             className="muted-button"
             type="button"
             value="Cancel"
