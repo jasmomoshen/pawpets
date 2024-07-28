@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
 const URL = `${PROXY_URL}https://maps.googleapis.com/maps/api/place/nearbysearch/json`;

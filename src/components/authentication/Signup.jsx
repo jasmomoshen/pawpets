@@ -12,7 +12,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [file, setFile] = useState(null);
-  const [err, setErr] = useState(false);
+  const [err, setErr] = useState(""); // Store error message
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
@@ -21,43 +21,45 @@ const Signup = () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      const storageRef = ref(storage, `avatars/${displayName}`);
+      const storageRef = ref(storage, `avatars/${res.user.uid}`);
       const uploadTask = uploadBytesResumable(storageRef, file);
 
       uploadTask.on(
         'state_changed',
         (snapshot) => {
-          // Handle progress if needed
         },
         (error) => {
-          // Handle error
-          setErr(true);
+          setErr("Failed to upload avatar. Please try again.");
         },
         async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          await updateProfile(res.user, {
-            displayName,
-            photoURL: downloadURL,
-          });
-          await setDoc(doc(db, 'users', res.user.uid), {
-            uid: res.user.uid,
-            displayName,
-            email,
-            photoURL: downloadURL,
-          });
-          await setDoc(doc(db, 'userChats', res.user.uid), {});
-          navigate('/');
+          try {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            await updateProfile(res.user, {
+              displayName,
+              photoURL: downloadURL,
+            });
+            await setDoc(doc(db, 'users', res.user.uid), {
+              uid: res.user.uid,
+              displayName,
+              email,
+              photoURL: downloadURL,
+            });
+            await setDoc(doc(db, 'userChats', res.user.uid), {});
+            navigate('/');
+          } catch (err) {
+            setErr("Failed to update profile. Please try again.");
+          }
         }
       );
     } catch (err) {
-      setErr(true);
+      setErr("Signup failed. Please try again.");
     }
   };
 
   return (
     <div className="signup-container">
       <span className='logo'>PawPets</span>
-      <span className='title'>Sign Up</span>
+      <span className='titlea'>Sign Up</span>
       <form onSubmit={handleSignup}>
         <input
           type="text"
@@ -88,7 +90,7 @@ const Signup = () => {
           <span>Add an avatar</span>
         </label>
         <button type="submit">Sign Up</button>
-        {err && <span>Something went wrong</span>}
+        {err && <span className="error">{err}</span>} {/* Display error message */}
       </form>
     </div>
   );

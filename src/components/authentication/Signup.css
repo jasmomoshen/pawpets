@@ -17,8 +17,10 @@
     padding: 12px;
     margin-bottom: 20px;
     color: black;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-    width: 100%; /* Make input and button full-width */
+    box-sizing: border-box;
+    /* Ensure padding and border are included in the element's total width and height */
+    width: 100%;
+    /* Make input and button full-width */
 }
 
 /* Additional styles for inputs */
@@ -37,7 +39,7 @@
 }
 
 /* Style for the title */
-.title {
+.titlea {
     color: #2B3A55;
     font-size: 20px;
     align-items: center;
@@ -65,7 +67,8 @@
 
 /* Style for the button */
 .signup-container button {
-    border-radius: 3px; /* Match the input border-radius */
+    border-radius: 3px;
+    /* Match the input border-radius */
     background-color: #CE7777;
     color: white;
     font-weight: bolder;
@@ -74,5 +77,6 @@
 
 /* Button hover effect */
 .signup-container button:hover {
-    background-color: #b65b5b; /* A darker shade for hover effect */
+    background-color: #b65b5b;
+    /* A darker shade for hover effect */
 }
