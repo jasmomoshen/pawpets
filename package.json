@@ -9,8 +9,6 @@
     "@mui/material": "^5.15.21",
     "@react-google-maps/api": "^2.19.3",
     "@reduxjs/toolkit": "^2.2.3",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
@@ -50,6 +48,18 @@
     ]
   },
   "devDependencies": {
-    "html-loader": "^5.0.0"
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "html-loader": "^5.0.0",
+    "jest": "^27.5.1",
+    "redux-mock-store": "^1.5.4"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!axios/)"
+    ]
   }
 }

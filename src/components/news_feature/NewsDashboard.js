@@ -34,7 +34,7 @@ function NewsDashboard() {
 
     return (
         <div className="App">
-            <h1 className="title">See The Latest Pets News LOL</h1>
+            <h1 className="title">Catch Up With The Latest Pets News </h1>
             <Menu active={active} setActive={setActive} setCategory={setCategory} />
             <NewsGrid items={items} />
 

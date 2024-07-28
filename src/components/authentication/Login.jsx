@@ -17,7 +17,7 @@ function Login() {
 
     return <div className="login">
         <span className='logo'>PawPets</span>
-        <span className='title'>Log In</span>
+        <span className='titlea'>Log In</span>
         <input
             onChange={event => setEmail(event.target.value)}
             type="email"
